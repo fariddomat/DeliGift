@@ -22,6 +22,7 @@ class UsersTableSeeder extends Seeder
         $user2=User::create([
             'name'=>'Rep',
             'email'=>'rep@deligift.com',
+            'city'=>'Damascus',
             'password'=>bcrypt('rep'),
         ]);
         $user2->attachRole('representative');

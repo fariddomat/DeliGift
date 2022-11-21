@@ -28,8 +28,44 @@
                         </div>
                         <div class="form-group">
                             <label for="name">City</label>
-                            <input type="text" class="form-control" name="city" id="name" value="{{ old('city', $user->city) }}"
-                                aria-describedby="helpId" placeholder="">
+                            <select name="city" id="" class="form-control">
+                                <option @if ($user->city=='Damascus')
+selected
+                                @endif value="Damascus">Damascus</option>
+                                <option @if ($user->city=='Homs')
+                                    selected
+                                                                    @endif  value="Homs">Homs</option>
+                                <option @if ($user->city=='Hama')
+                                    selected
+                                                                    @endif  value="Hama">Hama</option>
+                                <option @if ($user->city=='Latakia')
+                                    selected
+                                                                    @endif  value="Latakia">Latakia</option>
+                                <option @if ($user->city=='Aleppo')
+                                    selected
+                                                                    @endif  value="Aleppo">Aleppo</option>
+                                <option @if ($user->city=='Tartus')
+                                    selected
+                                                                    @endif  value="Tartus">Tartus</option>
+                                <option @if ($user->city=='Daraa')
+                                    selected
+                                                                    @endif  value="Daraa">Daraa</option>
+                                <option @if ($user->city=='Suwayda')
+                                    selected
+                                                                    @endif  value="Suwayda">Suwayda</option>
+                                <option @if ($user->city=='Hasaka')
+                                    selected
+                                                                    @endif  value="Hasaka">Hasaka</option>
+                                <option @if ($user->city=='Der_Al_Zor')
+                                    selected
+                                                                    @endif  value="Der_Al_Zor">Der_Al_Zor</option>
+                                <option @if ($user->city=='Raqqa')
+                                    selected
+                                                                    @endif  value="Raqqa">Raqqa</option>
+                                <option @if ($user->city=='Quneitra')
+                                    selected
+                                                                    @endif  value="Quneitra">Quneitra</option>
+                            </select>
                         </div>
 
                         {{-- Roles --}}

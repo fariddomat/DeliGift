@@ -18,6 +18,7 @@ class CreateOrdersGiftsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('order_id');
             $table->unsignedBigInteger('gift_id');
+            $table->unsignedBigInteger('count');
             $table->timestamps();
 
 

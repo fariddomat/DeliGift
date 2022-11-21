@@ -6,7 +6,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title">All gifts</h4>
+                    <h4 class="card-title">All Orders</h4>
                     <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
                     <div class="heading-elements">
                         <ul class="list-inline mb-0">
@@ -20,25 +20,10 @@
                 <div class="card-content collapse show">
                     <div class="card-body ">
 
-                        <a href="{{ route('admin.gifts.create') }}"
-                            class="btn btn-icon btn-info mr-1">Create <i class="fa fa-plus"
-                                style="position: relative"></i></a>
-
-                    </div>
-                    <form action="" class="row">
-                        <div class="form-group col-md-4 ml-2">
-                            <input type="text" class="form-control" name="search" id="search" autofocus
-                                value="{{ request()->search }}" aria-describedby="helpId" placeholder="Search">
-                        </div>
-                        <button type="submit" class="btn btn-primary col-md-2" style="  height: 40px;"><i class="fa fa-search"
-                                style="position: relative" aria-hidden="true"></i>
-                            Search</button>
 
 
 
-                    </form>
-
-                    @if ($gifts->count() == 0)
+                    @if ($orders->count() == 0)
                     <div class="table-responsive">
                     <h3 class="mr-3 mb-3"  >no data found</h3>
                     </div>
@@ -48,31 +33,25 @@
                             <thead>
                                 <tr>
                                     <th scope="col">#</th>
-                                    <th scope="col">Name</th>
+                                    <th scope="col">Sender Name</th>
+                                    <th scope="col">Delivery_date</th>
+                                    <th scope="col">Status</th>
                                     <th scope="col">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($gifts as $index => $gift)
+                                @foreach ($orders as $index => $order)
                                     <tr >
                                         <th scope="row">{{ $index + 1 }}</th>
-                                        <td dir="rtl">{{ $gift->name }}</td>
+                                        <td dir="rtl">{{ $order->user->name }}</td>
+                                        <td dir="rtl">{{ $order->delivery_date }}</td>
+                                        <td dir="rtl">{{ $order->status }}</td>
                                         <td class="form-group">
 
-                                            <a href="{{ route('admin.gifts.edit', $gift->id) }}" type="button"
+                                            <a href="{{ route('admin.orders.show', $order->id) }}" type="button"
                                                 class="btn btn-icon btn-warning mr-1"
-                                                style="  min-width: 100px;">Edit <i class="fa fa-edit"
+                                                style="  min-width: 100px;">Show <i class="fa fa-book"
                                                     style="position: relative;"></i></a>
-
-                                            <form action="{{ route('admin.gifts.destroy', $gift->id) }}"
-                                                method="POST" style="display: inline-block">
-                                                @csrf
-                                                @method('delete')
-
-                                                <button type="submit" class="btn btn-icon btn-danger mr-1"
-                                                    style="  min-width: 102px;">Delete <i class="fa fa-trash"
-                                                        style="position: relative;"></i></button>
-                                            </form>
 
                                         </td>
                                     </tr>
@@ -81,11 +60,12 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="text-center m-auto">{{ $gifts->appends(request()->query())->links() }}
+                    <div class="text-center m-auto">{{ $orders->appends(request()->query())->links() }}
                     </div>
                     @endif
 
 
+                </div>
                 </div>
             </div>
         </div>

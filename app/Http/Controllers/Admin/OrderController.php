@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Order;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
@@ -14,7 +16,15 @@ class OrderController extends Controller
      */
     public function index()
     {
-        //
+        if (Auth::user()->hasRole('admin')) {
+
+            $orders = Order::paginate(5);
+        } else {
+            $orders = Order::where('city',Auth::user()->city)->paginate(5);
+        }
+
+        // dd($orders);
+        return view('admin.orders.index', compact('orders'));
     }
 
     /**
@@ -46,7 +56,21 @@ class OrderController extends Controller
      */
     public function show($id)
     {
-        //
+        $order = Order::find($id);
+        return view('admin.orders.show', compact('order'));
+    }
+
+    public function confirm($id, Request $request)
+    {
+        $order=Order::find($id);
+        $order->update([
+            'status'=>$request->status,
+            'represntative_id'=>Auth::user()->id,
+            'represntative_note'=>$request->represntative_note,
+        ]);
+
+        // dd($order);
+        return redirect()->back();
     }
 
     /**
@@ -55,10 +79,7 @@ class OrderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-        //
-    }
+
 
     /**
      * Update the specified resource in storage.

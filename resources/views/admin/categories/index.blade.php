@@ -26,12 +26,12 @@
 
                     </div>
                     <form action="" class="row">
-                        <div class="form-group col-md-4">
+                        <div class="form-group col-md-4 ml-2">
                             <input type="text" class="form-control" name="search" id="search" autofocus
                                 value="{{ request()->search }}" aria-describedby="helpId" placeholder="Search">
                         </div>
-                        <button type="submit" class="btn btn-primary col-md-2"><i class="fa fa-search"
-                                style="position: relative" aria-hidden="true"></i>
+                        <button type="submit" class="btn btn-primary col-md-2" style="  height: 40px;"><i class="fa fa-search"
+                                style="position: relative;" aria-hidden="true"></i>
                             Search</button>
 
 

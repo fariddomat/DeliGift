@@ -21,6 +21,7 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 
         <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 
 <body>
@@ -33,6 +34,8 @@
 
 
 
+
+    @yield('scripts')
 </body>
 
 </html>

@@ -24,7 +24,7 @@ return [
         ],
         'representative'=>[
             'profile' => 'r,u',
-            'categories' => 'c,r,u,d',
+            'categories' => 'r',
             'gifts' => 'c,r,u,d',
             'orders' => 'c,r,u,d',
             'reports' => 'c,r,u,d',

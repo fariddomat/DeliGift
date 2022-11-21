@@ -71,7 +71,7 @@
                 @foreach ($latest as $item)
                 <div class="bg-white shadow rounded overflow-hidden group">
                     <div class="relative">
-                        <img src="{{ asset('home/assets/images/products/'.$item->img) }}" alt="product 1" class="w-full">
+                        <img src="{{ $item->image_path }}" alt="product 1" class="w-full">
                         <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center
                     justify-center gap-2 opacity-0 group-hover:opacity-100 transition">
                             <a href="{{ route('product', $item->id) }}"
@@ -79,7 +79,7 @@
                                 title="view product">
                                 <i class="fa-solid fa-magnifying-glass"></i>
                             </a>
-                            <a href="#"
+                            <a href="{{ route('addToFavorite', $item->id) }}"
                                 class="text-white text-lg w-9 h-8 rounded-full bg-primary flex items-center justify-center hover:bg-gray-800 transition"
                                 title="add to wishlist">
                                 <i class="fa-solid fa-heart"></i>
@@ -105,9 +105,15 @@
                             <div class="text-xs text-gray-500 ml-3">(150)</div>
                         </div>
                     </div>
-                    <a href="#"
-                        class="block w-full py-1 text-center text-white bg-primary border border-primary rounded-b hover:bg-transparent hover:text-primary transition">Add
-                        to cart</a>
+                    @if (isset(session('cart')[$item->id]))
+                            <a class="block w-full py-1 text-center text-white bg-success border"
+                                style="background-color: gold">Added
+                                to cart</a>
+                        @else
+                            <a href="{{ route('add.to.cart', $item->id) }}"
+                                class="block w-full py-1 text-center text-white bg-primary border border-primary rounded-b hover:bg-transparent hover:text-primary transition">Add
+                                to cart</a>
+                        @endif
                 </div>
                 @endforeach
 
@@ -130,7 +136,7 @@
                 @foreach ($recommended as $item)
 <div class="bg-white shadow rounded overflow-hidden group">
                     <div class="relative">
-                        <img src="{{ asset('home/assets/images/products/'.$item->img) }}" alt="product 1" class="w-full">
+                        <img src="{{ $item->image_path }}" alt="product 1" class="w-full">
                         <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center
                     justify-center gap-2 opacity-0 group-hover:opacity-100 transition">
                             <a href="{{ route('product', $item->id) }}"
@@ -138,7 +144,7 @@
                                 title="view product">
                                 <i class="fa-solid fa-magnifying-glass"></i>
                             </a>
-                            <a href="#"
+                            <a href="{{ route('addToFavorite', $item->id) }}"
                                 class="text-white text-lg w-9 h-8 rounded-full bg-primary flex items-center justify-center hover:bg-gray-800 transition"
                                 title="add to wishlist">
                                 <i class="fa-solid fa-heart"></i>
@@ -164,9 +170,15 @@
                             <div class="text-xs text-gray-500 ml-3">(150)</div>
                         </div>
                     </div>
-                    <a href="#"
-                        class="block w-full py-1 text-center text-white bg-primary border border-primary rounded-b hover:bg-transparent hover:text-primary transition">Add
-                        to cart</a>
+                    @if (isset(session('cart')[$item->id]))
+                            <a class="block w-full py-1 text-center text-white bg-success border"
+                                style="background-color: gold">Added
+                                to cart</a>
+                        @else
+                            <a href="{{ route('add.to.cart', $item->id) }}"
+                                class="block w-full py-1 text-center text-white bg-primary border border-primary rounded-b hover:bg-transparent hover:text-primary transition">Add
+                                to cart</a>
+                        @endif
                 </div>
                 @endforeach
 

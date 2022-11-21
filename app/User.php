@@ -77,6 +77,11 @@ class User extends Authenticatable
     {
         return $this->hasMany(Order::class);
     }
+
+    public function favorites()
+    {
+        return $this->hasMany(Favorite::class);
+    }
 public function notifications()
 {
     return  $this->hasMany(Notification::class);

@@ -2,7 +2,9 @@
 
 @section('body')
 
-
+<form action="{{ route('order.store') }}" method="post">
+@csrf
+@method('POST')
     <!-- breadcrumb -->
     <div class="container py-4 flex items-center gap-3">
         <a href="../index.html" class="text-primary text-base">
@@ -21,37 +23,59 @@
         <div class="bg-white col-span-8 border border-gray-200 p-4 rounded">
             <h3 class="text-lg font-medium capitalize mb-4">Checkout</h3>
             <div class="space-y-4">
+
                 <div >
                     <div>
-                        <label for="first-name" class="text-gray-600">Reciver Name <span
-                                class="text-primary">*</span></label>
-                        <input type="text" name="first-name" id="first-name" class="input-box">
+                        @extends('home._layouts._error')
+                    </div>
+                    <div>
+                        <label for="first-name" class="text-gray-600">Reciver Name </label>
+                        <input type="text" name="name" value="{{ old('name') }}" id="first-name" class="input-box" required>
                     </div>
                 </div>
                 <div>
                     <label for="phone" class="text-gray-600">Phone number</label>
-                    <input type="text" name="phone" id="phone" class="input-box">
+                    <input type="text" name="phone" value="{{ old('phone') }}"  id="phone" class="input-box" required>
                 </div>
-                
+
                 <div>
                     <label for="phone" class="text-gray-600">Date</label>
-                    <input type="date" name="delivery_date" id="phone" class="input-box">
+                    <input type="date" name="delivery_date" value="{{ old('delivery_date') }}"  id="phone" class="input-box" required>
                 </div>
-                
+
                 <div>
                     <label for="phone" class="text-gray-600">Time</label>
-                    <input type="time" name="delivery_time" id="phone" class="input-box">
+                    <input type="time" name="delivery_time"  value="{{ old('delivery_time') }}" id="phone" class="input-box" required>
                 </div>
 
                 <div>
                     <label for="city" class="text-gray-600">City</label>
-                    <input type="text" name="city" id="city" class="input-box">
+                    <select name="city" id="" class="input-box">
+                        <option value="Damascus">Damascus</option>
+                        <option value="Homs">Homs</option>
+                        <option value="Hama">Hama</option>
+                        <option value="Latakia">Latakia</option>
+                        <option value="Aleppo">Aleppo</option>
+                        <option value="Tartus">Tartus</option>
+                        <option value="Daraa">Daraa</option>
+                        <option value="Suwayda">Suwayda</option>
+                        <option value="Hasaka">Hasaka</option>
+                        <option value="Der_Al_Zor">Der_Al_Zor</option>
+                        <option value="Raqqa">Raqqa</option>
+                        <option value="Quneitra">Quneitra</option>
+                    </select>
                 </div>
                 <div>
                     <label for="address" class="text-gray-600">Street address</label>
-                    <input type="text" name="address" id="address" class="input-box">
+                    <input type="text" name="address" value="{{ old('address') }}"  id="address" class="input-box" required>
                 </div>
-                
+
+                <div>
+                    <label for="address" class="text-gray-600">Details</label>
+                   <textarea name="details" id="" class="input-box"> {{ old('details') }} </textarea>
+                </div>
+
+
             </div>
 
         </div>
@@ -59,32 +83,46 @@
         <div class="bg-white col-span-4 border border-gray-200 p-4 rounded">
             <h4 class="text-gray-800 text-lg mb-4 font-medium uppercase">order summary</h4>
             <div class="space-y-2">
-                <div class="flex justify-between">
+
+                    @php
+            $total=0
+            @endphp
+            @foreach(session('cart') as $id => $item)
+            @php
+            $total += $item['price'] * $item['quantity'] @endphp<div class="flex justify-between">
                     <div>
-                        <h5 class="text-gray-800 font-medium">Name 1</h5>
+                        <h5 class="text-gray-800 font-medium">{{ $item['name'] }}</h5>
                     </div>
                     <p class="text-gray-600">
-                        x3
+                        {{ $item['quantity'] }}
                     </p>
-                    <p class="text-gray-800 font-medium">$320</p>
-                </div>
-                
-                
+                    <p class="text-gray-800 font-medium">${{$item['price'] * $item['quantity'] }}</p>
+
+                </div>@endforeach
+
+
             </div>
 
             <div class="flex justify-between border-b border-gray-200 mt-1 text-gray-800 font-medium py-3 uppercas">
                 <p>subtotal</p>
-                <p>$320</p>
+                <p>${{ $total }}</p>
             </div>
 
             <div class="flex justify-between border-b border-gray-200 mt-1 text-gray-800 font-medium py-3 uppercas">
                 <p>shipping</p>
                 <p>Free</p>
             </div>
+            <div class="flex justify-between border-b border-gray-200 mt-1 text-gray-800 font-medium py-3 uppercas">
+                <p>Tax</p>
+                <p>2%</p>
+            </div>
 
             <div class="flex justify-between text-gray-800 font-medium py-3 uppercas">
                 <p class="font-semibold">Total</p>
-                <p>$320</p>
+                <p>@php
+                    $total2=$total- ($total*2/100)
+                @endphp
+                ${{ $total2 }}</p>
             </div>
 
             <div class="flex items-center mb-4 mt-2">
@@ -94,12 +132,13 @@
                         class="text-primary">terms & conditions</a></label>
             </div>
 
-            <a href="#"
+            <button type="submit"
                 class="block w-full py-3 px-4 text-center text-white bg-primary border border-primary rounded-md hover:bg-transparent hover:text-primary transition font-medium">Place
-                order</a>
+                order</button>
         </div>
 
     </div>
     <!-- ./wrapper -->
+</form>
 
 @endsection

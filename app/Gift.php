@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 class Gift extends Model
 {
@@ -30,4 +31,11 @@ class Gift extends Model
     {
         return $this->belongsToMany(Order::class, 'orders_gifts');
     }
+
+    public function getImagePathAttribute()
+    {
+        return Storage::url('images/gifts/'.$this->img);
+
+    }
+
 }

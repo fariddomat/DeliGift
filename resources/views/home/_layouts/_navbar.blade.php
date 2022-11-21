@@ -4,10 +4,10 @@
 @elseif (Request::is('login') || Request::is('register'))
     <div class="bg-cover bg-no-repeat bg-center"
         style="background-image: url('home/assets/images/bg1.jpg');>
- @elseif (Request::is('checkout') || Request::is('account'))
+ @elseif (Request::is('checkout') || Request::is('account')|| Request::is('orders')|| Request::is('favorite'))
     <div class="bg-cover bg-no-repeat bg-center"
         style="background-image: url('home/assets/images/bg3.jpg');>
-            
+
 @endif
 <header class="bg-white">
         <div class="container mx-auto px-6 py-3">
@@ -42,7 +42,10 @@
                 </div>
                 <div class="flex items-center justify-end w-full" style="justify-content: end;">
                     @auth
-                    <a href="{{ route('account') }}">{{Auth::user()->name}}</a>    
+                    <a href="{{ route('account') }}">{{Auth::user()->name}} </a>
+                    @if (Auth::user()->hasRole('admin') || Auth::user()->hasRole('representative') )
+                    <a href="{{ route('admin.home') }}"> - Control Panel</a>
+                    @endif
                     @endauth
                     <form action="{{ route('cart') }}" method="get">
                         @csrf

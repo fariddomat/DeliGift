@@ -37,8 +37,20 @@
                         </div>
                         <div class="form-group">
                             <label for="city">City</label>
-                            <input type="text" class="form-control" name="city" id="city" value="{{ old('city') }}"
-                                aria-describedby="helpId" placeholder="">
+                            <select name="city" id="" class="form-control">
+                                <option value="Damascus">Damascus</option>
+                                <option value="Homs">Homs</option>
+                                <option value="Hama">Hama</option>
+                                <option value="Latakia">Latakia</option>
+                                <option value="Aleppo">Aleppo</option>
+                                <option value="Tartus">Tartus</option>
+                                <option value="Daraa">Daraa</option>
+                                <option value="Suwayda">Suwayda</option>
+                                <option value="Hasaka">Hasaka</option>
+                                <option value="Der_Al_Zor">Der_Al_Zor</option>
+                                <option value="Raqqa">Raqqa</option>
+                                <option value="Quneitra">Quneitra</option>
+                            </select>
                         </div>
                         {{-- Roles --}}
                         <div class="form-group">

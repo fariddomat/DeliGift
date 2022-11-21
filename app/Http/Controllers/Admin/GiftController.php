@@ -12,6 +12,13 @@ use Intervention\Image\Facades\Image;
 use Session;
 class GiftController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:read_gifts')->only(['index']);
+        $this->middleware('permission:create_gifts')->only(['create','store']);
+        $this->middleware('permission:update_gifts')->only(['edit','update']);
+        $this->middleware('permission:delete_gifts')->only(['destroy']);
+    }
      /**
      * Display a listing of the resource.
      *
@@ -56,9 +63,7 @@ class GiftController extends Controller
 
         $request_data = $request->except(['img']);
 
-        $img = Image::make($request->img)->resize(300, null, function ($constraint) {
-            $constraint->aspectRatio();
-        })
+        $img = Image::make($request->img)->resize(250, 200)
             ->encode('jpg');
 
         Storage::disk('local')->put('public/images/gifts/' . $request->img->hashName(), (string)$img, 'public');
@@ -113,9 +118,7 @@ class GiftController extends Controller
         if ($request->img) {
             Storage::disk('local')->delete('public/images/gifts/' . $gift->img);
 
-            $img = Image::make($request->img)->resize(300, null, function ($constraint) {
-                $constraint->aspectRatio();
-            })
+            $img = Image::make($request->img)->resize(250,200)
                 ->encode('jpg');
 
             Storage::disk('local')->put('public/images/gifts/' . $request->img->hashName(), (string)$img, 'public');
