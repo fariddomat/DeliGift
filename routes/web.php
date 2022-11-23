@@ -18,6 +18,13 @@ Route::get('shop', 'Home\ShopController@index')->name('shop');
 Route::get('product/{id}', 'Home\ShopController@product')->name('product');
 
 Route::get('account', 'Home\AccountController@index')->name('account');
+Route::get('editProfile', 'Home\AccountController@editProfile')->name('editProfile');
+Route::post('updateProfile', 'Home\AccountController@updateProfile')->name('updateProfile');
+
+
+Route::get('changePassword', 'Home\AccountController@changePassword')->name('changePassword');
+Route::post('changePass', 'Home\AccountController@changePass')->name('changePass');
+
 Route::get('orders', 'Home\AccountController@orders')->name('orders');
 Route::get('order/{id}', 'Home\AccountController@order')->name('order');
 Route::get('favorite', 'Home\AccountController@favorite')->name('favorite');

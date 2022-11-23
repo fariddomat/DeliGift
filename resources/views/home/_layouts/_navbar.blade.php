@@ -4,7 +4,7 @@
 @elseif (Request::is('login') || Request::is('register'))
     <div class="bg-cover bg-no-repeat bg-center"
         style="background-image: url('home/assets/images/bg1.jpg');>
- @elseif (Request::is('checkout') || Request::is('account')|| Request::is('orders')|| Request::is('favorite'))
+ @else
     <div class="bg-cover bg-no-repeat bg-center"
         style="background-image: url('home/assets/images/bg3.jpg');>
 
@@ -48,7 +48,7 @@
                     @endif
                     @endauth
                     <form action="{{ route('cart') }}" method="get">
-                        @csrf
+                        {{-- @csrf --}}
                     <button type="submit" @click="cartOpen = !cartOpen" class="text-gray-600 focus:outline-none mx-4 mx-0">
                         <svg class="h-5 w-5" fill="none" stroke-linecap="round" stroke-linejoin="round"
                             stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">

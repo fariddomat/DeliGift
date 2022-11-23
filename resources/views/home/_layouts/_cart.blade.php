@@ -149,7 +149,7 @@
                                     </div>
                                     <div class="lg:px-4 lg:py-2 m-2 lg:text-lg font-bold text-center text-gray-900">
                                         @php
-                                            $total2 = $total - ($total * 2) / 100;
+                                            $total2 = $total + ($total * 2) / 100;
                                         @endphp
                                         ${{ $total2 }}
                                     </div>

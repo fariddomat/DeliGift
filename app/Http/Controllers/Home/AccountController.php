@@ -5,8 +5,11 @@ namespace App\Http\Controllers\Home;
 use App\Favorite;
 use App\Http\Controllers\Controller;
 use App\Order;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Rules\MatchOldPassword;
+use Illuminate\Support\Facades\Hash;
 
 class AccountController extends Controller
 {
@@ -21,6 +24,51 @@ class AccountController extends Controller
         return view('home.account.index')->with([
             'user'=>$user
         ]);
+    }
+
+    public function editProfile()
+    {
+        $user=Auth::user();
+        return view('home.account.editProfile')->with([
+            'user'=>$user
+        ]);
+    }
+
+    public function updateProfile(Request $request)
+    {
+        $request->validate([
+            'name'=>'required',
+            'email'=>'required|email'
+        ]);
+        $user=User::find(Auth::id());
+        $user->update([
+            'name'=>$request->name,
+            'email'=>$request->email,
+        ]);
+        return view('home.account.editProfile')->with([
+            'user'=>$user
+        ]);
+    }
+
+    public function changePassword()
+    {
+        $user=Auth::user();
+        return view('home.account.changePassword')->with([
+            'user'=>$user
+        ]);
+    }
+
+    public function changePass(Request $request)
+    {
+        $request->validate([
+            'current_password' => ['required', new MatchOldPassword],
+            'new_password' => ['required'],
+            'new_confirm_password' => ['same:new_password'],
+        ]);
+        User::find(auth()->user()->id)->update(['password'=> Hash::make($request->new_password)]);
+
+        return redirect()->back();
+
     }
 
     public function checkout()

@@ -12,8 +12,9 @@ Route::prefix('admin')
         Route::resource('gifts', 'GiftController');
         Route::resource('users', 'UserController');
         Route::resource('orders', 'OrderController');
+        Route::get('myOrder', 'OrderController@myOrder')->name('orders.myOrder');
         Route::post('confirm/{id}', 'OrderController@confirm')->name('orders.confirm');
         Route::post('unban/{id}', 'UserController@unban')->name('users.unban');
-        Route::post('unban/{id}', 'UserController@unban')->name('users.unban');
+        Route::post('ban/{id}', 'UserController@ban')->name('users.ban');
 
     });

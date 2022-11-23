@@ -120,7 +120,7 @@
             <div class="flex justify-between text-gray-800 font-medium py-3 uppercas">
                 <p class="font-semibold">Total</p>
                 <p>@php
-                    $total2=$total- ($total*2/100)
+                    $total2=$total+ ($total*2/100)
                 @endphp
                 ${{ $total2 }}</p>
             </div>

@@ -79,11 +79,19 @@
                                 title="view product">
                                 <i class="fa-solid fa-magnifying-glass"></i>
                             </a>
+                            @if ($item->is_Favored)
+                            <a href="{{ route('removeFromFavorite', $item->favorite->id) }}"
+                                class="text-primary text-lg w-9 h-8 rounded-full bg-white flex items-center justify-center hover:bg-gray-800 transition"
+                                title="add to wishlist">
+                                <i class="fa-solid fa-heart"></i>
+                            </a>
+                            @else
                             <a href="{{ route('addToFavorite', $item->id) }}"
                                 class="text-white text-lg w-9 h-8 rounded-full bg-primary flex items-center justify-center hover:bg-gray-800 transition"
                                 title="add to wishlist">
                                 <i class="fa-solid fa-heart"></i>
                             </a>
+                            @endif
                         </div>
                     </div>
                     <div class="pt-4 pb-3 px-4">
@@ -144,11 +152,19 @@
                                 title="view product">
                                 <i class="fa-solid fa-magnifying-glass"></i>
                             </a>
+                            @if ($item->is_Favored)
+                            <a href="{{ route('removeFromFavorite', $item->favorite->id) }}"
+                                class="text-primay text-lg w-9 h-8 rounded-full bg-white flex items-center justify-center hover:bg-gray-800 transition"
+                                title="add to wishlist">
+                                <i class="fa-solid fa-heart"></i>
+                            </a>
+                            @else
                             <a href="{{ route('addToFavorite', $item->id) }}"
                                 class="text-white text-lg w-9 h-8 rounded-full bg-primary flex items-center justify-center hover:bg-gray-800 transition"
                                 title="add to wishlist">
                                 <i class="fa-solid fa-heart"></i>
                             </a>
+                            @endif
                         </div>
                     </div>
                     <div class="pt-4 pb-3 px-4">

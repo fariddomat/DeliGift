@@ -103,4 +103,11 @@ class OrderController extends Controller
     {
         //
     }
+
+    public function myOrder()
+    {
+        $orders = Order::where('represntative_id', Auth::id())->paginate(5);
+        return view('admin.orders.index', compact('orders'));
+
+    }
 }

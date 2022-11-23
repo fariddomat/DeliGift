@@ -38,4 +38,17 @@ class Gift extends Model
 
     }
 
+    public function getIsFavoredAttribute()
+    {
+        if (auth()->user()) {
+            return (bool)$this->favorite()->where('user_id', auth()->user()->id)->count();
+        }
+        return false;
+    }
+
+    public function favorite()
+    {
+        return $this->hasOne(Favorite::class);
+    }
+
 }

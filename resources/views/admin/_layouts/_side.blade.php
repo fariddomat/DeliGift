@@ -28,10 +28,16 @@
                     href="{{ route('admin.orders.index') }}"><i class="fa fa-shopping-cart"></i><span class="menu-title"
                         data-i18n="">Orders</span></a>
             </li>
-            <li class=" nav-item {{ Request::is('admin/users*') ? 'active' : '' }} "><a
-                    href="{{ route('admin.users.index') }}"><i class="ft-users"></i><span class="menu-title"
-                        data-i18n="">Users</span></a>
+            <li class=" nav-item  {{ Request::is('admin/myOrder') ? 'active' : '' }} "><a
+                    href="{{ route('admin.orders.myOrder') }}"><i class="fa fa-shopping-cart"></i><span class="menu-title"
+                        data-i18n="">my Orders</span></a>
             </li>
+            @if (Auth::user()->hasRole('admin'))
+                <li class=" nav-item {{ Request::is('admin/users*') ? 'active' : '' }} "><a
+                        href="{{ route('admin.users.index') }}"><i class="ft-users"></i><span class="menu-title"
+                            data-i18n="">Users</span></a>
+                </li>
+            @endif
         </ul>
     </div><a class="btn btn-danger btn-block btn-glow btn-upgrade-pro mx-1" href="/" target="_blank">Home</a>
     <div class="navigation-background"></div>

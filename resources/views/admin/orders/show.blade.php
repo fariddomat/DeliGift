@@ -60,27 +60,31 @@
                                 </table>
                             </div>
                             <div class="col-lg-6">
-                                @if ($order->status == 'approved')
-                                <form action="{{ route('admin.orders.confirm', $order->id) }}" method="post">
-                                    @csrf
-                                    @method('POST')
-                                    <input type="hidden" name="order_id" value="{{ $order->id }}">
-                                    <input type="hidden" name="status" value="done">
-                                    <button class="btn btn-success mt-2">Mark as done</button>
-                                </form>
-                                @elseif ($order->status =='pending')
-                                    <form action="{{ route('admin.orders.confirm', $order->id) }}" method="post">
-                                        @csrf
-                                        @method('POST')
-                                        <input type="hidden" name="order_id" value="{{ $order->id }}">
-                                        <select name="status" class="form-control" id="">
-                                            <option value="approved">Approve</option>
-                                            <option value="rejected">Reject</option>
-                                        </select>
-                                        <textarea name="represntative_note" class="form-control mt-2"></textarea>
-                                        <button class="btn btn-primary mt-2">save</button>
-                                    </form>
-                                @endif
+                               @if ($order->represntative_id == Auth::id())
+                               @if ($order->status == 'approved')
+                               <form action="{{ route('admin.orders.confirm', $order->id) }}" method="post">
+                                   @csrf
+                                   @method('POST')
+                                   <input type="hidden" name="order_id" value="{{ $order->id }}">
+                                   <input type="hidden" name="status" value="done">
+                                   <button class="btn btn-success mt-2">Mark as done</button>
+                               </form>
+                               @elseif ($order->status =='pending')
+                                   <form action="{{ route('admin.orders.confirm', $order->id) }}" method="post">
+                                       @csrf
+                                       @method('POST')
+                                       <input type="hidden" name="order_id" value="{{ $order->id }}">
+                                       <select name="status" class="form-control" id="">
+                                           <option value="approved">Approve</option>
+                                           <option value="rejected">Reject</option>
+                                       </select>
+                                       <textarea name="represntative_note" class="form-control mt-2"></textarea>
+                                       <button class="btn btn-primary mt-2">save</button>
+                                   </form>
+                               @endif
+                               @else
+                                   <h2 class="bg-warning text-white p-2">You are not the represntative how take the order</h2>
+                               @endif
 
                             </div>
                         </div>

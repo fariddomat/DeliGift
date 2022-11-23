@@ -29,16 +29,16 @@
 
         <div class="mt-6 bg-white shadow rounded p-4 divide-y divide-gray-200 space-y-4 text-gray-600">
             <div class="space-y-1 pl-8">
-                <a href="#" class="relative text-primary block font-medium capitalize transition">
+                <a href="{{ route('account') }}" class="relative text-primary block font-medium capitalize transition">
                     <span class="absolute -left-8 top-0 text-base">
                         <i class="fa-regular fa-address-card"></i>
                     </span>
                     Manage account
                 </a>
-                <a href="#" class="relative hover:text-primary block capitalize transition">
+                <a href="{{ route('editProfile') }}" class="relative hover:text-primary block capitalize transition">
                     Profile information
                 </a>
-                <a href="#" class="relative hover:text-primary block capitalize transition">
+                <a href="{{ route('changePassword') }}" class="relative hover:text-primary block capitalize transition">
                     Change password
                 </a>
             </div>
@@ -55,7 +55,7 @@
 
 
             <div class="space-y-1 pl-8 pt-4">
-                <a href="{{ route('favorite', ['id'=>1]) }}" class="relative hover:text-primary block font-medium capitalize transition">
+                <a href="{{ route('favorite') }}" class="relative hover:text-primary block font-medium capitalize transition">
                     <span class="absolute -left-8 top-0 text-base">
                         <i class="fa-regular fa-heart"></i>
                     </span>
@@ -64,12 +64,17 @@
             </div>
 
             <div class="space-y-1 pl-8 pt-4">
-                <a href="#" class="relative hover:text-primary block font-medium capitalize transition">
-                    <span class="absolute -left-8 top-0 text-base">
-                        <i class="fa fa-sign-out"></i>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                            @csrf<button href="{{ route('logout') }}" class="relative hover:text-primary block font-medium capitalize transition">
+                    <span class="absolute -left-8 top-0 text-base"  onclick="event.preventDefault();
+                    document.getElementById('logout-form').submit();">
+                        <i class="fa fa-sign-out" ></i>
                     </span>
+
+
                     Logout
-                </a>
+                </button>
+                        </form>
             </div>
 
         </div>
