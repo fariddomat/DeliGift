@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Notification;
 use App\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -67,6 +68,13 @@ class OrderController extends Controller
             'status'=>$request->status,
             'represntative_id'=>Auth::user()->id,
             'represntative_note'=>$request->represntative_note,
+        ]);
+
+        $notify=Notification::create([
+            'user_id'=>$order->user_id,
+            'head'=>'Order '.$request->status,
+            'body'=>$request->represntative_note,
+            'url'=>$order->id,
         ]);
 
         // dd($order);

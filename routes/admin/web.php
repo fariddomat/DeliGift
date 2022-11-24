@@ -13,8 +13,13 @@ Route::prefix('admin')
         Route::resource('users', 'UserController');
         Route::resource('orders', 'OrderController');
         Route::get('myOrder', 'OrderController@myOrder')->name('orders.myOrder');
+
         Route::post('confirm/{id}', 'OrderController@confirm')->name('orders.confirm');
         Route::post('unban/{id}', 'UserController@unban')->name('users.unban');
         Route::post('ban/{id}', 'UserController@ban')->name('users.ban');
+
+        Route::get('/reports', 'ReportController@reports')->name('reports');
+        Route::get('/reportCheck/{id}', 'ReportController@reportCheck')->name('reportCheck');
+
 
     });

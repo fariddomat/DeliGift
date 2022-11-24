@@ -19,8 +19,8 @@ class CreateReportsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('order_id');
-            $table->string('details');
-
+            $table->text('details');
+            $table->string('status')->default('pending');
             $table->timestamps();
 
 

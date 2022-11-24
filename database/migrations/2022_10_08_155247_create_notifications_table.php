@@ -20,6 +20,7 @@ class CreateNotificationsTable extends Migration
             $table->string('head');
             $table->string('body');
             $table->string('url')->nullable();
+            $table->string('status')->default('unread');
             $table->timestamps();
 
 

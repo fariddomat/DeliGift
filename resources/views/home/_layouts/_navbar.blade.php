@@ -6,7 +6,7 @@
         style="background-image: url('home/assets/images/bg1.jpg');>
  @else
     <div class="bg-cover bg-no-repeat bg-center"
-        style="background-image: url('home/assets/images/bg3.jpg');>
+        style="background-image: url('/home/assets/images/bg3.jpg');>
 
 @endif
 <header class="bg-white">

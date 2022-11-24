@@ -38,6 +38,7 @@ Route::get('add-to-cart/{id}', 'Home\OrderController@addToCart')->name('add.to.c
 Route::patch('update-cart', 'Home\OrderController@update')->name('update.cart');
 Route::delete('remove-from-cart', 'Home\OrderController@remove')->name('remove.from.cart');
 Route::post('store', 'Home\OrderController@store')->name('order.store');
+Route::post('report/{id}', 'Home\OrderController@report')->name('order.report');
 
 Auth::routes();
 

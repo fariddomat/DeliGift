@@ -56,6 +56,14 @@
                             </div>
                         </div>
                     </div>
+                    <div class="">
+                        <br><br>
+                        <form action="{{ route('order.report', $order->id) }}" method="POST">
+                            @csrf
+                            <textarea name="details" cols="10" class="input-box"></textarea>
+                            <button class="inline-block px-6 py-2.5 bg-red-500 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-red-600 hover:shadow-lg focus:bg-red-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-red-700 active:shadow-lg transition duration-150 ease-in-out">Report</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>

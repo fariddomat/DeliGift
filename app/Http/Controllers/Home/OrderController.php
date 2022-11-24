@@ -6,6 +6,7 @@ use App\Gift;
 use App\Http\Controllers\Controller;
 use App\Order;
 use App\OrdersGifts;
+use App\Report;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -16,7 +17,7 @@ class OrderController extends Controller
     {
         $gift = Gift::findOrFail($id);
         $cart = session()->get('cart', []);
-        if(isset($cart[$id])) {
+        if (isset($cart[$id])) {
             $cart[$id]['quantity']++;
         } else {
             $cart[$id] = [
@@ -36,64 +37,75 @@ class OrderController extends Controller
 
     {
 
-        if($request->id && $request->quantity){
+        if ($request->id && $request->quantity) {
             $cart = session()->get('cart');
             $cart[$request->id]["quantity"] = $request->quantity;
             session()->put('cart', $cart);
             session()->flash('success', 'Cart updated successfully');
         }
-
     }
 
 
     public function remove(Request $request)
     {
-        if($request->id) {
+        if ($request->id) {
             $cart = session()->get('cart');
-            if(isset($cart[$request->id])) {
+            if (isset($cart[$request->id])) {
                 unset($cart[$request->id]);
                 session()->put('cart', $cart);
             }
             session()->flash('success', 'Product removed successfully');
         }
-
     }
 
     public function store(Request $request)
     {
 
         $request->validate([
-            'name'=> 'required',
-            'phone'=> 'required',
-            'delivery_date'=> 'required',
-            'delivery_time'=> 'required',
-            'city'=> 'required',
-            'address'=> 'required',
-            'details'=> 'required',
+            'name' => 'required',
+            'phone' => 'required',
+            'delivery_date' => 'required',
+            'delivery_time' => 'required',
+            'city' => 'required',
+            'address' => 'required',
+            'details' => 'required',
         ]);
 
-        $order=Order::create([
+        $order = Order::create([
 
-            'user_id'=> Auth::user()->id,
-            'name'=> $request->name,
-            'phone'=>  $request->phone,
-            'delivery_date'=>  $request->delivery_date,
-            'delivery_time'=>  $request->delivery_time,
-            'city'=>  $request->city,
-            'address'=>  $request->address,
-            'details'=>  $request->details,
+            'user_id' => Auth::user()->id,
+            'name' => $request->name,
+            'phone' =>  $request->phone,
+            'delivery_date' =>  $request->delivery_date,
+            'delivery_time' =>  $request->delivery_time,
+            'city' =>  $request->city,
+            'address' =>  $request->address,
+            'details' =>  $request->details,
         ]);
-        foreach( session('cart') as $id=>$item){
+        foreach (session('cart') as $id => $item) {
             // dd($id);
             OrdersGifts::create([
-                'order_id'=>$order->id,
-                'gift_id'=>$id,
-                'count'=>$item['quantity']
+                'order_id' => $order->id,
+                'gift_id' => $id,
+                'count' => $item['quantity']
             ]);
-
         }
-
         return redirect()->route('account');
     }
 
+    public function report($id, Request $request)
+    {
+        $order = Order::find($id);
+        if ($order) {
+            $report = Report::create([
+                'user_id' => Auth::user()->id,
+                'order_id' => $id,
+                'details' => $request->details,
+            ]);
+            $report->save();
+            return back();
+        } else {
+            abort(404);
+        }
+    }
 }

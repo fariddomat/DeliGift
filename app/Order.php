@@ -20,8 +20,20 @@ class Order extends Model
         return $this->hasMany(OrdersGifts::class);
     }
 
+    public function reports()
+    {
+        return $this->hasMany(Report::class);
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);
     }
+
+    public function represntative()
+    {
+        return $this->belongsTo(User::class,'represntative_id');
+    }
+
+
 }

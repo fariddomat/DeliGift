@@ -1,4 +1,5 @@
 <?php
+
 namespace App;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -46,31 +47,31 @@ class User extends Authenticatable
 
 
 
-    public function scopeWhereRole($query,$role_name)
+    public function scopeWhereRole($query, $role_name)
     {
-        return $query->whereHas('roles',function($q) use ($role_name){
+        return $query->whereHas('roles', function ($q) use ($role_name) {
             return $q->whereIn('name', (array)$role_name)
-                    ->orWhereIn('id',(array)$role_name);
+                ->orWhereIn('id', (array)$role_name);
         });
     }
-    public function scopeWhereRoleNot($query,$role_name)
+    public function scopeWhereRoleNot($query, $role_name)
     {
-        return $query->whereHas('roles',function($q) use ($role_name){
+        return $query->whereHas('roles', function ($q) use ($role_name) {
             return $q->whereNotIn('name', (array)$role_name)
-                    ->WhereNotIn('id',(array)$role_name);
+                ->WhereNotIn('id', (array)$role_name);
         });
     }
-    public function scopeWhenSearch($query,$search)
+    public function scopeWhenSearch($query, $search)
     {
-        return $query->when($search,function($q) use ($search){
-            return $q->where('name','like',"%$search%" );
+        return $query->when($search, function ($q) use ($search) {
+            return $q->where('name', 'like', "%$search%");
         });
     }
 
-    public function scopeWhenRole($query,$role_id)
+    public function scopeWhenRole($query, $role_id)
     {
-        return $query->when($role_id,function($q) use ($role_id){
-            return $this->scopeWhereRole($q,$role_id);
+        return $query->when($role_id, function ($q) use ($role_id) {
+            return $this->scopeWhereRole($q, $role_id);
         });
     }
     public function orders()
@@ -82,11 +83,13 @@ class User extends Authenticatable
     {
         return $this->hasMany(Favorite::class);
     }
-public function notifications()
-{
-    return  $this->hasMany(Notification::class);
-}
+    public function reports()
+    {
+        return $this->hasMany(Report::class);
+    }
 
-
-
+    public function notifications()
+    {
+        return  $this->hasMany(Notification::class);
+    }
 }
