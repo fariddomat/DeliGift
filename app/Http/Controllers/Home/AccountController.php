@@ -74,7 +74,7 @@ class AccountController extends Controller
     public function checkout()
     {
         if(!session('cart')){
-            return redirect()->back();
+            return view('home.account.checkout2');
         }
         return view('home.account.checkout');
     }

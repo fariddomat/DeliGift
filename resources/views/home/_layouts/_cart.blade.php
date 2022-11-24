@@ -1,27 +1,29 @@
 @extends('home._layouts.master')
 
 @section('body')
-    <div class="overflow-hidden flex items-center justify-center" style="background: #edf2f7;">
+    <div class="overflow-hidden flex items-center justify-center" style="">
         <div class="flex justify-center my-6">
             <div class="flex flex-col w-full p-8 text-gray-800 bg-white shadow-lg pin-r pin-y md:w-4/5 lg:w-4/5">
                 <div class="flex-1">
                     <table class="w-full text-sm lg:text-base" cellspacing="0">
-                        <thead>
-                            <tr class="h-12 uppercase">
-                                <th class=" md:table-cell"></th>
-                                <th class="text-left pl-4">Product</th>
-                                <th class="text-center pl-5 lg:pl-0">
-                                    <span class="lg:hidden" title="Quantity">Qtd</span>
-                                    <span class="lg:inline">Quantity</span>
-                                </th>
-                                <th class="text-right md:table-cell">Unit price</th>
-                                <th class="hidden text-right">Total price</th>
-                            </tr>
-                        </thead>
-                        <tbody> @php
-                            $total = 0;
-                        @endphp
-                            @if (session('cart'))
+                        @php
+                                $total = 0;
+                                     @endphp
+                        @if (session('cart'))
+                            <thead>
+                                <tr class="h-12 uppercase">
+                                    <th class=" md:table-cell"></th>
+                                    <th class="text-left pl-4">Product</th>
+                                    <th class="text-center pl-5 lg:pl-0">
+                                        <span class="lg:hidden" title="Quantity">Qtd</span>
+                                        <span class="lg:inline">Quantity</span>
+                                    </th>
+                                    <th class="text-right md:table-cell">Unit price</th>
+                                    <th class="hidden text-right">Total price</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
                                 @foreach (session('cart') as $id => $item)
                                     @php
                                     $total += $item['price'] * $item['quantity']; @endphp
@@ -61,8 +63,12 @@
                                         </td>
                                     </tr>
                                 @endforeach
-                            @endif
-                        </tbody>
+
+                            </tbody>
+                        @else
+                            Nothing is the cart ..want to request a customized order?
+                            <a href="{{ route('checkout') }}" class="inline-block px-6 py-2.5 bg-green-500 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-green-600 hover:shadow-lg focus:bg-green-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-green-700 active:shadow-lg transition duration-150 ease-in-out">Order Noew</a>
+                        @endif
                     </table>
                     <hr class="pb-6 mt-6">
                     <div class="my-4 mt-6 -mx-2 lg:flex">

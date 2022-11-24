@@ -18,6 +18,7 @@ class CreateOrdersTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger("user_id");
             $table->string("details");
+            $table->string('price')->nullable();
             $table->string("name");
             $table->string("phone");
             $table->date("delivery_date");

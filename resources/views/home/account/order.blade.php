@@ -15,44 +15,50 @@
                                 <h3>
                                     {{ $order->represntative_note }}
                                 </h3>
-                                <table class="min-w-full">
-                                    <thead class="bg-white border-b">
-                                        <tr>
-                                            <th scope="col"
-                                                class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                                #
-                                            </th>
-                                            <th scope="col"
-                                                class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                                Name
-                                            </th>
-                                            <th scope="col"
-                                                class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                               Count
-                                            </th>
+                               @if ($order->orders_gifts->count() > 0)
+                               <table class="min-w-full">
+                                <thead class="bg-white border-b">
+                                    <tr>
+                                        <th scope="col"
+                                            class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                            #
+                                        </th>
+                                        <th scope="col"
+                                            class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                            Name
+                                        </th>
+                                        <th scope="col"
+                                            class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                           Count
+                                        </th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($order->orders_gifts as $index => $item)
+                                        @if ($index % 2 == 0)
+                                            <tr class="bg-gray-100 border-b">
+                                            @else
+                                            <tr class="bg-white border-b">
+                                        @endif
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                            <img src="{{ $item->gift->image_path }}" style="max-width: 50px" alt=""></td>
+                                        <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                            {{ $item->gift->name }}
+                                        </td>
+                                        <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                            {{ $item->count}}
+                                        </td>
 
                                         </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach ($order->orders_gifts as $index => $item)
-                                            @if ($index % 2 == 0)
-                                                <tr class="bg-gray-100 border-b">
-                                                @else
-                                                <tr class="bg-white border-b">
-                                            @endif
-                                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                                <img src="{{ $item->gift->image_path }}" style="max-width: 50px" alt=""></td>
-                                            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                {{ $item->gift->name }}
-                                            </td>
-                                            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                {{ $item->count}}
-                                            </td>
-
-                                            </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                            @else
+                            <h2>This is a customized order</h2>
+                            <h3>Details : <span class="text-green-600">{{ $order->details }}</span></h3>
+                            <h3>Price :  <span class="text-yellow-400">{{ $order->price }} $</span></h3>
+                               @endif
                             </div>
                         </div>
                     </div>

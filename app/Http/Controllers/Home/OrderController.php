@@ -82,14 +82,21 @@ class OrderController extends Controller
             'address' =>  $request->address,
             'details' =>  $request->details,
         ]);
-        foreach (session('cart') as $id => $item) {
-            // dd($id);
-            OrdersGifts::create([
-                'order_id' => $order->id,
-                'gift_id' => $id,
-                'count' => $item['quantity']
-            ]);
+
+        if(!session('cart')){
+            $order->price=$request->price;
+            $order->save();
+        }else{
+            foreach (session('cart') as $id => $item) {
+                // dd($id);
+                OrdersGifts::create([
+                    'order_id' => $order->id,
+                    'gift_id' => $id,
+                    'count' => $item['quantity']
+                ]);
+            }
         }
+
         return redirect()->route('account');
     }
 

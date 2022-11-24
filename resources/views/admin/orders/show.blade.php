@@ -60,7 +60,7 @@
                                 </table>
                             </div>
                             <div class="col-lg-6">
-                               @if ($order->represntative_id == Auth::id())
+                               @if ($order->represntative_id == Auth::id() || !$order->represntative_id )
                                @if ($order->status == 'approved')
                                <form action="{{ route('admin.orders.confirm', $order->id) }}" method="post">
                                    @csrf
@@ -91,7 +91,13 @@
                         <br><br>
                         @if ($order->orders_gifts->count() == 0)
                             <div class="table-responsive">
+                                @if ($order->price)
+
+                                <h3 class="mr-3 mb-3">Expected Price: {{ $order->price }} </h3>
+                                    @else
+
                                 <h3 class="mr-3 mb-3">no data found</h3>
+                                @endif
                             </div>
                         @else
                             <div class="table-responsive">

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Order extends Model
 {
     //
-    protected $fillable = ['user_id', 'name', 'phone', 'delivery_date', 'delivery_time', 'city', 'address', 'details','status', 'represntative_id', 'represntative_note'];
+    protected $fillable = ['user_id', 'name', 'phone', 'delivery_date', 'delivery_time', 'city', 'address', 'details','status', 'represntative_id', 'represntative_note' , 'price'];
     // protected $guraded=[];
     public function gifts()
     {
