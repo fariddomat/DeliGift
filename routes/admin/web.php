@@ -12,6 +12,7 @@ Route::prefix('admin')
         Route::resource('gifts', 'GiftController');
         Route::resource('users', 'UserController');
         Route::resource('orders', 'OrderController');
+        Route::resource('coupons', 'CouponController');
         Route::get('myOrder', 'OrderController@myOrder')->name('orders.myOrder');
 
         Route::post('confirm/{id}', 'OrderController@confirm')->name('orders.confirm');

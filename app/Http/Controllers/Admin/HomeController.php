@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Category;
+use App\Coupon;
 use App\Gift;
 use App\Http\Controllers\Controller;
 use App\Order;
@@ -20,6 +21,7 @@ class HomeController extends Controller
         $users=User::count();
         $orders=Order::count();
         $reports=Report::count();
-        return view('admin.index', compact('categories', 'gifts', 'users', 'orders', 'reports'));
+        $coupons=Coupon::count();
+        return view('admin.index', compact('categories', 'gifts', 'users', 'orders', 'reports', 'coupons'));
     }
 }

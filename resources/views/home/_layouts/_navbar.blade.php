@@ -2,12 +2,12 @@
     <div class="bg-cover bg-no-repeat bg-center"
         style="background-image: url('home/assets/images/1.jpg.webp');>
 @elseif (Request::is('login') || Request::is('register'))
-    <div class="bg-cover bg-no-repeat bg-center"
-        style="background-image: url('home/assets/images/bg1.jpg');>
- @else
-    <div class="bg-cover bg-no-repeat bg-center"
+<div class="bg-cover
+        bg-no-repeat bg-center" style="background-image: url('home/assets/images/bg1.jpg');>
+@else
+<div class="bg-cover
+        bg-no-repeat bg-center"
         style="background-image: url('/home/assets/images/bg3.jpg');>
-
 @endif
 <header class="bg-white">
         <div class="container mx-auto px-6 py-3">
@@ -25,7 +25,7 @@
 
                     @guest
                         <a href="{{ route('login') }}">&mapsto; Login </a>
-                    @else
+                    {{-- @else
                         <a class="dropdown-item" href="{{ route('logout') }}"
                             onclick="event.preventDefault();
                              document.getElementById('logout-form').submit();">
@@ -34,7 +34,7 @@
 
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                             @csrf
-                        </form>
+                        </form> --}}
                     @endguest
                 </div>
                 <div class="w-full text-gray-700 text-center text-2xl font-semibold">
@@ -42,21 +42,41 @@
                 </div>
                 <div class="flex items-center justify-end w-full" style="justify-content: end;">
                     @auth
-                    <a href="{{ route('account') }}">{{Auth::user()->name}} </a>
-                    @if (Auth::user()->hasRole('admin') || Auth::user()->hasRole('representative') )
-                    <a href="{{ route('admin.home') }}"> - Control Panel</a>
-                    @endif
+                        <a href="{{ route('account') }}"><i class="fa fa-user" style="margin-left: 5px;
+                            background-color: white;
+                            padding: 5px;
+                            border-radius: 25px;
+                            color: #30ca97;"></i> </a>
+                        @if (Auth::user()->hasRole('admin') || Auth::user()->hasRole('representative'))
+                            <a href="{{ route('admin.home') }}"> <i class="fa fa-dashboard" style="margin-left: 5px;
+                                background-color: white;
+                                padding: 5px;
+                                border-radius: 25px;
+                                color: #760be1;"></i></a>
+                        @endif
+
+                        <a href="{{ route('notifications') }}" class="notification"><i class="fa fa-bell"
+                                style="color: gold;
+                        background: white;
+                        border-radius: 25px;
+                        padding: 5px;
+                        margin-left: 5px;"></i>
+
+                            <span class="badge" @if (Auth::user()->un_read_notifications == 0) style="display: none" @endif>
+                                {{ Auth::user()->un_read_notifications }}
+                            </span></a>
+
                     @endauth
                     <form action="{{ route('cart') }}" method="get">
                         {{-- @csrf --}}
-                    <button type="submit" @click="cartOpen = !cartOpen" class="text-gray-600 focus:outline-none mx-4 mx-0">
-                        <svg class="h-5 w-5" fill="none" stroke-linecap="round" stroke-linejoin="round"
-                            stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
-                            <path
-                                d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z">
-                            </path>
-                        </svg>
-                    </button>
+                        <button type="submit" @click="cartOpen = !cartOpen"
+                            class="text-gray-600 focus:outline-none">
+                            <i class="fa fa-shopping-cart" style="margin-left: 5px;
+                            background-color: white;
+                            padding: 5px;
+                            border-radius: 25px;
+                            color: #0bd3e1;"></i>
+                        </button>
                     </form>
                     <div class="flex hidden">
                         <button @click="isOpen = !isOpen" type="button"
@@ -75,7 +95,8 @@
                 <div class="flex flex-col flex-row" style="  display: block;">
                     <a class="mt-3 text-gray-600 hover:underline mx-3 mt-0" href="{{ route('index') }}">Home</a>
                     <a class="mt-3 text-gray-600 hover:underline mx-3 mt-0" href="{{ route('shop') }}">Shop</a>
-                    <a class="mt-3 text-gray-600 hover:underline mx-3 mt-0" href="{{ route('index') }}#category">Categories</a>
+                    <a class="mt-3 text-gray-600 hover:underline mx-3 mt-0"
+                        href="{{ route('index') }}#category">Categories</a>
                     <a class="mt-3 text-gray-600 hover:underline mx-3 mt-0" href="#">Contact</a>
                     <a class="mt-3 text-gray-600 hover:underline mx-3 mt-0" href="#">About</a>
                 </div>
@@ -89,9 +110,11 @@
                     </svg>
                 </span>
 
-                <input
-                    class="pl-10 block w-full rounded-md border-gray-300 shadow-sm border-blue-300 ring ring-blue-200 ring-opacity-50"
-                    type="text" placeholder="Search" style="padding-left: 40px">
+                <form action="{{ route('shop') }}" method="get">
+                    <input name="search" value="{{ old('search') }}"
+                        class="pl-10 block w-full rounded-md border-gray-300 shadow-sm border-blue-300 ring ring-blue-200 ring-opacity-50"
+                        type="text" placeholder="Search" style="padding-left: 40px">
+                </form>
 
             </div>
         </div>

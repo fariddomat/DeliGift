@@ -22,14 +22,15 @@
         <div>
             <h2 class="text-3xl font-medium uppercase mb-2">{{ $gift->name }}</h2>
             <div class="flex items-center mb-4">
-                <div class="flex gap-1 text-sm text-yellow-400">
+                <div class="flex gap-1 text-sm text-yellow-400">@for ($i = 1; $i <= $gift->rating; $i++)
                     <span><i class="fa-solid fa-star"></i></span>
-                    <span><i class="fa-solid fa-star"></i></span>
-                    <span><i class="fa-solid fa-star"></i></span>
-                    <span><i class="fa-solid fa-star"></i></span>
-                    <span><i class="fa-solid fa-star"></i></span>
+
+                    @endfor
+                    @for ($i = $gift->rating; $i < 5; $i++)
+                    <span><i class="fa fa-star" style="color: gray;"></i></span>
+                    @endfor
                 </div>
-                <div class="text-xs text-gray-500 ml-3">(150 Reviews)</div>
+                {{-- <div class="text-xs text-gray-500 ml-3">(150 Reviews)</div> --}}
             </div>
             <div class="space-y-2">
 
@@ -148,14 +149,15 @@
                             {{-- <p class="text-sm text-gray-400 line-through">$55.90</p> --}}
                         </div>
                         <div class="flex items-center">
-                            <div class="flex gap-1 text-sm text-yellow-400">
+                            <div class="flex gap-1 text-sm text-yellow-400">@for ($i = 1; $i <= $item->rating; $i++)
                                 <span><i class="fa-solid fa-star"></i></span>
-                                <span><i class="fa-solid fa-star"></i></span>
-                                <span><i class="fa-solid fa-star"></i></span>
-                                <span><i class="fa-solid fa-star"></i></span>
-                                <span><i class="fa-solid fa-star"></i></span>
+
+                                @endfor
+                                @for ($i = $item->rating; $i < 5; $i++)
+                                <span><i class="fa fa-star" style="color: gray;"></i></span>
+                                @endfor
                             </div>
-                            <div class="text-xs text-gray-500 ml-3">(150)</div>
+                            {{-- <div class="text-xs text-gray-500 ml-3">(150)</div> --}}
                         </div>
                     </div>
                     @if (isset(session('cart')[$item->id]))

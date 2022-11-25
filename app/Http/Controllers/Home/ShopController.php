@@ -10,10 +10,15 @@ use Illuminate\Http\Request;
 class ShopController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
         $categories=Category::withCount('gifts')->get();
-        $gifts=Gift::latest()->paginate(6);
+        $gifts=Gift::whenSearch($request->search)
+        ->whenCategory($request->categories)
+        ->whenTag($request->tags)
+        ->whenMin($request->min)
+        ->whenMax($request->max)
+        ->latest()->paginate(6);
 
         return view('home.shop')->with([
             'categories'=>$categories,

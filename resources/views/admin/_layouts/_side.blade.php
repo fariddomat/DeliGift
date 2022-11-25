@@ -33,6 +33,10 @@
                         data-i18n="">my Orders</span></a>
             </li>
             @if (Auth::user()->hasRole('admin'))
+
+            <li class=" nav-item {{ Request::is('admin/coupons*') ? 'active' : '' }} "><a
+                href="{{ route('admin.coupons.index') }}"><i class="fa fa-tags"></i><span class="menu-title"
+                    data-i18n="">Coupons</span></a>
                 <li class=" nav-item {{ Request::is('admin/reports') ? 'active' : '' }} "><a
                         href="{{ route('admin.reports') }}"><i class="fa fa-ban"></i><span class="menu-title"
                             data-i18n="">Reports</span></a>

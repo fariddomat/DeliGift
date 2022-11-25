@@ -25,6 +25,8 @@ Route::post('updateProfile', 'Home\AccountController@updateProfile')->name('upda
 Route::get('changePassword', 'Home\AccountController@changePassword')->name('changePassword');
 Route::post('changePass', 'Home\AccountController@changePass')->name('changePass');
 
+Route::get('notifications', 'Home\AccountController@notifications')->name('notifications');
+Route::get('markasRead/{id}', 'Home\AccountController@markasRead')->name('markasRead');
 Route::get('orders', 'Home\AccountController@orders')->name('orders');
 Route::get('order/{id}', 'Home\AccountController@order')->name('order');
 Route::get('favorite', 'Home\AccountController@favorite')->name('favorite');
@@ -39,6 +41,7 @@ Route::patch('update-cart', 'Home\OrderController@update')->name('update.cart');
 Route::delete('remove-from-cart', 'Home\OrderController@remove')->name('remove.from.cart');
 Route::post('store', 'Home\OrderController@store')->name('order.store');
 Route::post('report/{id}', 'Home\OrderController@report')->name('order.report');
+Route::post('coupon', 'Home\OrderController@coupon')->name('order.coupon');
 
 Auth::routes();
 

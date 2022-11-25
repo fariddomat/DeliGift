@@ -19,7 +19,7 @@ class GiftSeeder extends Seeder
             Gift::create([
             'name'=>'Gift '.$i,
             'details'=>'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
-            'tags'=>'Tag'.$x,
+            'tags'=>'New',
             'price'=>'99',
             'rating'=>4,
             'source'=>'Store '.$x,

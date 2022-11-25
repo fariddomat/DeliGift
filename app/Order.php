@@ -35,5 +35,9 @@ class Order extends Model
         return $this->belongsTo(User::class,'represntative_id');
     }
 
+    public function coupon()
+    {
+        return $this->belongsTo(Coupon::class);
+    }
 
 }

@@ -28,6 +28,8 @@ class CreateOrdersTable extends Migration
             $table->string('status')->default('pending');
             $table->unsignedBigInteger('represntative_id')->nullable();
             $table->string('represntative_note')->nullable();
+            $table->unsignedBigInteger('coupon_id')->nullable();
+
             $table->timestamps();
 
 

@@ -112,6 +112,16 @@
                 <p>shipping</p>
                 <p>Free</p>
             </div>
+            @if (session('coupon'))
+
+            <div class="flex justify-between border-b border-gray-200 mt-1 text-gray-800 font-medium py-3 uppercas">
+                <p>Coupon discount</p>
+                <p>{{ session('coupon') }}%</p>
+            </div>
+            @php
+                    $total=$total - ($total*session('coupon')/100)
+                @endphp
+            @endif
             <div class="flex justify-between border-b border-gray-200 mt-1 text-gray-800 font-medium py-3 uppercas">
                 <p>Tax</p>
                 <p>2%</p>

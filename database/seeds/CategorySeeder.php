@@ -12,7 +12,7 @@ class CategorySeeder extends Seeder
      */
     public function run()
     {
-        $categories=['souvenirs', 'accessories', 'food', 'colthes', 'furniture', 'money'];
+        $categories=['souvenirs', 'accessories', 'food', 'colthes', 'furniture', 'books'];
         foreach ($categories as $key => $value) {
             Category::create([
                 'name'=>$value

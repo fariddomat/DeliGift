@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Home;
 
 use App\Favorite;
 use App\Http\Controllers\Controller;
+use App\Notification;
 use App\Order;
 use App\User;
 use Illuminate\Http\Request;
@@ -83,6 +84,27 @@ class AccountController extends Controller
     {
 
         return View('home._layouts._cart');
+    }
+
+    // notifications
+    public function notifications()
+    {
+        $user=Auth::user();
+        $notifications=Notification::where('user_id',Auth::user()->id)->orderBy('status','desc')->get();
+        return view('home.account.notifications')->with([
+            'user'=>$user,
+            'notifications'=>$notifications,
+        ]);
+    }
+
+    // markasRead
+    public function markasRead($id)
+    {
+        $notification=Notification::find($id);
+        $notification->update([
+            'status'=>'read'
+        ]);
+        return redirect()->back();
     }
 
     public function orders()

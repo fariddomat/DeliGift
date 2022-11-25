@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Storage;
 class Gift extends Model
 {
     //
-    protected $guarded=[];
+    protected $guarded = [];
 
     public function getNameAttribute($value)
     {
@@ -17,8 +17,35 @@ class Gift extends Model
 
     public function scopeWhenSearch($query, $search)
     {
-        return $query->when($search,function($q) use ($search){
-            return $q->where('name','like',"%$search%");
+        return $query->when($search, function ($q) use ($search) {
+            return $q->where('name', 'like', "%$search%");
+        });
+    }
+    public function scopeWhenCategory($query, $request)
+    {
+        return $query->when($request, function ($q) use ($request) {
+            $q->whereIn('category_id', $request);
+        });
+    }
+
+    public function scopeWhenTag($query, $request)
+    {
+        return $query->when($request, function ($q) use ($request) {
+            $q->whereIn('tags', $request);
+        });
+    }
+
+    public function scopeWhenMax($query, $request)
+    {
+        return $query->when($request, function ($q) use ($request) {
+            $q->where('price', '<', $request);
+        });
+    }
+
+    public function scopeWhenMin($query, $request)
+    {
+        return $query->when($request, function ($q) use ($request) {
+            $q->where('price', '>', $request);
         });
     }
 
@@ -34,8 +61,7 @@ class Gift extends Model
 
     public function getImagePathAttribute()
     {
-        return Storage::url('images/gifts/'.$this->img);
-
+        return Storage::url('images/gifts/' . $this->img);
     }
 
     public function getIsFavoredAttribute()
@@ -50,5 +76,4 @@ class Gift extends Model
     {
         return $this->hasOne(Favorite::class);
     }
-
 }

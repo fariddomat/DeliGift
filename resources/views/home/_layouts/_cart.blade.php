@@ -7,8 +7,8 @@
                 <div class="flex-1">
                     <table class="w-full text-sm lg:text-base" cellspacing="0">
                         @php
-                                $total = 0;
-                                     @endphp
+                            $total = 0;
+                        @endphp
                         @if (session('cart'))
                             <thead>
                                 <tr class="h-12 uppercase">
@@ -67,7 +67,9 @@
                             </tbody>
                         @else
                             Nothing is the cart ..want to request a customized order?
-                            <a href="{{ route('checkout') }}" class="inline-block px-6 py-2.5 bg-green-500 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-green-600 hover:shadow-lg focus:bg-green-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-green-700 active:shadow-lg transition duration-150 ease-in-out">Order Noew</a>
+                            <a href="{{ route('checkout') }}"
+                                class="inline-block px-6 py-2.5 bg-green-500 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-green-600 hover:shadow-lg focus:bg-green-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-green-700 active:shadow-lg transition duration-150 ease-in-out">Order
+                                Noew</a>
                         @endif
                     </table>
                     <hr class="pb-6 mt-6">
@@ -79,11 +81,14 @@
                             <div class="p-4">
                                 <p class="mb-4 italic">If you have a coupon code, please enter it in the box below</p>
                                 <div class="justify-center md:flex">
-                                    <form action="" method="POST">
+                                    <form action="{{ route('order.coupon') }}" method="POST">
+                                        @csrf
+                                        @method('POST')
+
                                         <div
                                             class="flex items-center w-full h-13 pl-3 bg-white bg-gray-100 border rounded-full">
                                             <input type="coupon" name="code" id="coupon" placeholder="Apply coupon"
-                                                value="90off"
+                                                value="{{ old('code') }}"
                                                 class="w-full bg-gray-100 outline-none appearance-none focus:outline-none active:outline-none" />
                                             <button type="submit"
                                                 class="text-sm flex items-center px-3 py-1 text-white bg-gray-800 rounded-full outline-none md:px-4 hover:bg-gray-700 focus:outline-none active:outline-none">
@@ -95,6 +100,9 @@
                                                 <span class="font-medium">Apply coupon</span>
                                             </button>
                                         </div>
+                                        @if (session('status'))
+                                            <h2 class="bg-gray">{{ session('status') }}</h2>
+                                        @endif
                                     </form>
                                 </div>
                             </div>
@@ -141,6 +149,19 @@
                   14,882.75€
                 </div>
               </div> --}}
+                               @if (session('coupon'))
+                               <div class="flex justify-between pt-4 border-b">
+                                <div class="lg:px-4 lg:py-2 m-2 text-lg lg:text-xl font-bold text-center text-gray-800">
+                                    Coupon discount
+                                </div>
+                                <div class="lg:px-4 lg:py-2 m-2 lg:text-lg font-bold text-center text-gray-900">
+                                    {{ session('coupon') }}%
+                                </div>
+                            </div>
+                            @php
+                                            $total = $total - ($total * session('coupon') ) / 100;
+                                        @endphp
+                               @endif
                                 <div class="flex justify-between pt-4 border-b">
                                     <div class="lg:px-4 lg:py-2 m-2 text-lg lg:text-xl font-bold text-center text-gray-800">
                                         Tax
@@ -149,6 +170,7 @@
                                         2%
                                     </div>
                                 </div>
+
                                 <div class="flex justify-between pt-4 border-b">
                                     <div class="lg:px-4 lg:py-2 m-2 text-lg lg:text-xl font-bold text-center text-gray-800">
                                         Total

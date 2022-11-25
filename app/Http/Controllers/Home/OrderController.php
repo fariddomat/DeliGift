@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Home;
 
+use App\Coupon;
 use App\Gift;
 use App\Http\Controllers\Controller;
 use App\Order;
@@ -96,8 +97,27 @@ class OrderController extends Controller
                 ]);
             }
         }
+        if (session('coupon_id')) {
+            $order->coupon_id=session('coupon_id');
+            $order->save();
+        }
 
         return redirect()->route('account');
+    }
+
+    public function coupon(Request $request)
+    {
+        $coupon=Coupon::where('code',$request->code)->where('expire_date', '>', now())->first();
+        if($coupon){
+            $c = session()->put('coupon', $coupon->percent);
+            $c_id = session()->put('coupon_id', $coupon->id);
+            session()->flash('status', 'Coupon Successfully applied');
+        }else{
+
+            session()->flash('status', 'Your Coupon have expired');
+        }
+        return redirect()->back();
+
     }
 
     public function report($id, Request $request)
