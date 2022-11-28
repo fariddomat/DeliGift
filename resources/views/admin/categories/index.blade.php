@@ -4,7 +4,7 @@
     <!-- Striped rows start -->
     <div class="row">
         <div class="col-12">
-            <div class="card">
+            <div class="card ">
                 <div class="card-header">
                     <h4 class="card-title">All categories</h4>
                     <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
@@ -30,7 +30,7 @@
                             <input type="text" class="form-control" name="search" id="search" autofocus
                                 value="{{ request()->search }}" aria-describedby="helpId" placeholder="Search">
                         </div>
-                        <button type="submit" class="btn btn-primary col-md-2" style="  height: 40px;"><i class="fa fa-search"
+                        <button type="submit" class="btn btn-primary col-md-2" style="  height: 40px;margin: auto 25px;"><i class="fa fa-search"
                                 style="position: relative;" aria-hidden="true"></i>
                             Search</button>
 
@@ -57,7 +57,8 @@
                                     <tr >
                                         <th scope="row">{{ $index + 1 }}</th>
                                         <td dir="rtl">{{ $category->name }}</td>
-                                        <td class="form-group">
+                                        <td class="form-group" style="  display: flex;
+                                        word-wrap: inherit;border: none;">
 
                                             <a href="{{ route('admin.categories.edit', $category->id) }}" type="button"
                                                 class="btn btn-icon btn-warning mr-1"

@@ -3,6 +3,8 @@
 use App\Gift;
 use Illuminate\Database\Seeder;
 
+use Illuminate\Support\Str;
+use Faker\Generator as Faker;
 class GiftSeeder extends Seeder
 {
     /**
@@ -15,9 +17,9 @@ class GiftSeeder extends Seeder
         //
         for ($i=0; $i < 36; $i++) {
             $x=($i%6) +1;
-            $x2=($i%8) +1;
+            $x2=$x;
             Gift::create([
-            'name'=>'Gift '.$i,
+            'name'=>Str::random(10),
             'details'=>'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
             'tags'=>'New',
             'price'=>'99',

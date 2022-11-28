@@ -78,7 +78,7 @@
                                                 </h5>
                                             @endforeach
                                         </td>
-                                        <td>
+                                        <td >
 
                                             @if (auth()->user()->hasPermission('update_users'))
 

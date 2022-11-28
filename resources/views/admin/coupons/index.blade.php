@@ -28,9 +28,9 @@
                     <form action="" class="row">
                         <div class="form-group col-md-4 ml-2">
                             <input type="text" class="form-control" name="search" id="search" autofocus
-                                value="{{ request()->search }}" aria-describedby="helpId" placeholder="Search">
+                                value="{{ request()->search }}" style="" aria-describedby="helpId" placeholder="Search" >
                         </div>
-                        <button type="submit" class="btn btn-primary col-md-2" style="  height: 40px;"><i class="fa fa-search"
+                        <button type="submit" class="btn btn-primary col-md-2" style="  height: 40px;margin: auto 25px"><i class="fa fa-search"
                                 style="position: relative;" aria-hidden="true"></i>
                             Search</button>
 
@@ -63,7 +63,8 @@
                                         <td dir="rtl">{{ $coupon->percent }}</td>
                                         <td dir="rtl">{{ $coupon->expire_date }}</td>
                                         <td dir="rtl">{{ $coupon->orders->count() }}</td>
-                                        <td class="form-group">
+                                        <td class="form-group" style="  display: flex;
+                                        word-wrap: inherit;border: none;">
 
                                             <a href="{{ route('admin.coupons.edit', $coupon->id) }}" type="button"
                                                 class="btn btn-icon btn-warning mr-1"

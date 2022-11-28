@@ -16,7 +16,7 @@
     <!-- product-detail -->
     <div class="container grid grid-cols-2 gap-6">
         <div>
-            <img src="{{ asset('home/assets/images/products/' . $gift->img) }}" alt="product" class="w-full">
+            <img src="{{ $gift->image_path }}" alt="product" class="w-full">
         </div>
 
         <div>
@@ -113,7 +113,7 @@
             @foreach ($related as $item)
                 <div class="bg-white shadow rounded overflow-hidden group">
                     <div class="relative">
-                        <img src="{{ asset('home/assets/images/products/' . $item->img) }}" alt="product .$item->id"
+                        <img src="{{ $item->image_path }}" alt="product .$item->id"
                             class="w-full">
                         <div
                             class="absolute inset-0 bg-black bg-opacity-40 flex items-center

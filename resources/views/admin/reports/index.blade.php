@@ -45,7 +45,11 @@
                                     <tr >
                                         <th scope="row">{{ $report->order_id }}</th>
                                         <td>{{ $report->user->name }}</td>
-                                        <td>{{ $report->order->represntative->name }}</td>
+                                        <td>@if ($report->order->represntative)
+                                            {{ $report->order->represntative->name }}
+                                        @else
+No one yet !
+                                        @endif</td>
                                         <td>{{ $report->details }}</td>
                                         <td>{{ $report->status }}</td>
                                         <td class="form-group">

@@ -30,7 +30,7 @@
                             <input type="text" class="form-control" name="search" id="search" autofocus
                                 value="{{ request()->search }}" aria-describedby="helpId" placeholder="Search">
                         </div>
-                        <button type="submit" class="btn btn-primary col-md-2" style="  height: 40px;"><i class="fa fa-search"
+                        <button type="submit" class="btn btn-primary col-md-2" style="  height: 40px;margin: auto 25px;"><i class="fa fa-search"
                                 style="position: relative" aria-hidden="true"></i>
                             Search</button>
 
@@ -57,7 +57,8 @@
                                     <tr >
                                         <th scope="row">{{ $index + 1 }}</th>
                                         <td dir="rtl">{{ $gift->name }}</td>
-                                        <td class="form-group">
+                                        <td class="form-group" style="display: flex;
+                                        word-wrap: inherit;border: none;">
 
                                             <a href="{{ route('admin.gifts.edit', $gift->id) }}" type="button"
                                                 class="btn btn-icon btn-warning mr-1"

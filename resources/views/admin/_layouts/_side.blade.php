@@ -1,5 +1,5 @@
-<div class="main-menu menu-fixed menu-light menu-accordion    menu-shadow " data-scroll-to-active="true"
-    data-img="theme-assets/images/backgrounds/02.jpg">
+<div class="main-menu menu-fixed menu-dark menu-accordion    menu-shadow " data-scroll-to-active="true"
+    style="">
     <div class="navbar-header">
         <ul class="nav navbar-nav flex-row">
             <li class="nav-item mr-auto"><a class="navbar-brand" href="{{ route('admin.home') }}">
@@ -47,6 +47,6 @@
                 </li>
             @endif
         </ul>
-    </div><a class="btn btn-danger btn-block btn-glow btn-upgrade-pro mx-1" href="/" target="_blank">Home</a>
+    </div><a class="btn btn-primary btn-block btn-glow btn-upgrade-pro mx-1" href="/" target="_blank">Home</a>
     <div class="navigation-background"></div>
 </div>
